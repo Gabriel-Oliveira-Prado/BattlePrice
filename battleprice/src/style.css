@@ -51,16 +51,37 @@ body{
     justify-content: center;
     height: 90vh;
     background-color: #E2E8F0;
+    /* 1. Mudamos de 'center' para 'flex-start' para mandar o conteúdo para cima */
+    justify-content: flex-start; 
+  
+    /* 2. Usamos o padding para empurrar o conteúdo para baixo de forma controlada */
+    padding-top: 60px;
+
   }
   
+.titulo-principal{
+    font-family: 'Arial', sans-serif;
+    font-size: 3.5em;
+    font-weight: 800;
+    color: #333;
+    margin-bottom: 20px;
+  }
+.metade-amarela {
+    color: #ccff00;
+  }
+.metade-verde { 
+    color: #4cd137;  
+  }
 
   p{
     font-family: 'Arial', sans-serif;
     font-size: 1.2em;
-    color: #333;
+    font-weight: bold;
+    color: #000000cb;
     margin-bottom: 20px;
+    padding: 70px;  
   }
-  
+
   footer {
   display: flex;
   font-family: 'Inter', sans-serif;
