@@ -1,15 +1,16 @@
+alert("O JavaScript foi carregado com sucesso!");
+
 import './style.css'
-import javascriptLogo from './assets/javascript.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import { setupCounter } from './counter.js'
 
+// Mudamos o alvo do clique do 'main' para a própria 'tela-inicial'
+const telaInicial = document.getElementById('tela-inicial');
+const telaJogo = document.getElementById('tela-jogo');
 
-document.querySelector('#app').innerHTML = `
-  <div class="tela-inicial">
-    <h1>BattlePrice</h1>
-    <p class="piscar">Clique em qualquer lugar para começar</p>
-  </div>
-`
-
-setupCounter(document.querySelector('#counter'))
+// Agora o ouvinte fica vigiando a tela inicial
+telaInicial.addEventListener('click', function() {
+    // 1. Esconde a tela inicial
+    telaInicial.classList.add('escondido');
+    
+    // 2. Mostra a tela do jogo
+    telaJogo.classList.remove('escondido');
+});
