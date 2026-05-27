@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BattlePrice - Home</title>
     <!-- Link para o seu CSS principal -->
-     <link rel="shortcut icon" href="favicon.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="Iconecarrinho.png" type="image/x-icon">
     <link rel="stylesheet" href="/src/style.css">
 </head>
 <body>
@@ -32,16 +32,20 @@
     
     <div id="tela-jogo" class="escondido">
     
-    <div class="caixa-imagem-api">
-        <img src="ps3.png" alt="Item do Jogo" id="imagem-produto">
+    <div class="caixa-contador">
+        <p id="contador-chances" style="padding: 0; margin-bottom: 10px;"></p>
     </div>
 
-    <div class="caixa-palpite">
-        <h3>Qual é o preço deste item?</h3>
-        
-        <input type="number" id="palpite-usuario" placeholder="Digite o valor em R$">
-        
-        <button id="btn-chutar">Chutar Preço</button>
+    <div class="conteudo-jogo">
+        <div class="caixa-imagem-api">
+            <img src=" " alt="Item do Jogo" id="imagem-produto">
+        </div>
+
+        <div class="caixa-palpite">
+            <h3>Qual é o preço deste item?</h3>
+            <input type="number" id="palpite-usuario" placeholder="Digite o valor em R$">
+            <button id="btn-chutar">Chutar Preço</button>
+        </div>
     </div>
 
 </div>

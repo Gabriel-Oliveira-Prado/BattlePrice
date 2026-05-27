@@ -103,15 +103,40 @@ body{
   padding: 20px 40px; /* Aumentei um pouco para desgrudar das bordas, igual ao header */
 }
 
+/* Modifique a regra atual do #tela-jogo para ficar assim: */
 #tela-jogo {
     display: flex;
-    flex-direction: row;     /* Coloca uma caixa do lado da outra */
-    align-items: center;     /* Alinha elas no meio verticalmente */
-    justify-content: center; /* Centraliza o grupo todo na tela */
-    gap: 60px;               /* Cria um espaço bem confortável entre a imagem e o campo */
+    flex-direction: column;  /* Alinha o bloco do contador em cima do jogo */
+    align-items: center;     
+    justify-content: center;
     width: 100%;
-    max-width: 900px;        /* Limita o tamanho para não espalhar demais em telas gigantes */
+    max-width: 900px;        
     margin-top: 20px;
+    gap: 15px;               /* Espaço perfeito entre o contador e o jogo */
+}
+
+ 
+.caixa-contador {
+    width: 100%;
+    text-align: center;
+}
+
+/* Remove o padding gigante apenas do seu contador de jogo */
+.caixa-contador p {
+    padding: 10px 0px !important; 
+    margin: 0;
+    font-size: 1.4em;
+    color: #333;
+}
+
+
+.conteudo-jogo {
+    display: flex;
+    flex-direction: row;     /* Mantém a imagem e o input estritamente lado a lado */
+    align-items: center;     
+    justify-content: center; 
+    gap: 60px;               
+    width: 100%;
 }
 
 /* Estilização da caixa da esquerda (onde a imagem vai ficar) */
@@ -125,6 +150,11 @@ body{
     justify-content: center;
     width: 300px;            /* Tamanho fixo para a caixinha da imagem */
     height: 300px;
+}
+
+img  {
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .caixa-palpite {
