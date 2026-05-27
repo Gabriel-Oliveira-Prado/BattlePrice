@@ -49,13 +49,13 @@ telaInicial.addEventListener("click", async function () {
 // ── Ao chutar o preço ──
 btnChutar.addEventListener("click", function () {
   
-  // SE AS CHANCES JÁ ACABARAM: O botão agora serve para carregar o próximo produto
+  // SE AS CHANCES JÁ ACABARAM: Avança para o próximo produto
   if (obterChancesAtuais() === 0) {
-    elementoContador.click(); // Reseta o contador no counter.js para 3
-    carregarProduto();        // Busca um novo produto da API
-    btnChutar.textContent = "Chutar Preço"; // Restaura o texto original do botão
+    elementoContador.resetCounter(); // REINICIA para 3 chances de verdade
+    carregarProduto();        
+    btnChutar.textContent = "Chutar Preço"; 
     palpiteInput.value = "";
-    palpiteInput.disabled = false; // Reativa o campo de texto
+    palpiteInput.disabled = false; 
     return;
   }
 
@@ -70,7 +70,7 @@ btnChutar.addEventListener("click", function () {
     mensagem = `🎯 Incrível! Acertou! O preço era R$ ${precoReal.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
     acertou = true;
   } else {
-    // Se errou, simula o clique para diminuir 1 chance
+    // Se errou, diminui 1 chance usando o clique
     elementoContador.click(); 
     
     if (diff <= 20) {
@@ -80,30 +80,27 @@ btnChutar.addEventListener("click", function () {
     }
   }
 
-  // ── VERIFICAÇÃO DE CHANCES APÓS O CHUTE ──
+  // ── VERIFICAÇÃO APÓS O CHUTE ──
   if (acertou) {
     alert(mensagem);
-    elementoContador.click(); // Força resetar para 3 se estava em transição
-    carregarProduto();
+    elementoContador.resetCounter(); // 🎯 SE ACERTOU: Volta o contador para 3 na hora!
+    carregarProduto();               // Carrega o próximo item
     palpiteInput.value = "";
   } else if (obterChancesAtuais() === 0) {
-    // Se as chances zeraram AGORA com esse erro:
-    // Pegamos o preço formatado em reais
+    // Se as chances zeraram com o erro atual:
     const precoFormatado = precoReal.toLocaleString("pt-BR", { minimumFractionDigits: 2 });
     
-    // Forçamos o texto do contador a exibir a mensagem com o preço correto
     elementoContador.innerHTML = `
       <span style="color: #ff1900; display: block; margin-bottom: 5px; font-weight: bold;">Acabaram suas chances!</span>
       <span style="color: #09ff00; font-size: 1.2em;">O preço correto era <strong>R$ ${precoFormatado}</strong></span>
     `;
 
-    // Transforma o botão e desativa o input para melhorar a experiência visual
     btnChutar.textContent = "Ver Próximo Produto";
     palpiteInput.disabled = true;
     
     alert(`${mensagem}\nSuas chances acabaram! O preço correto foi revelado na tela.`);
   } else {
-    // Se errou mas ainda tem chances sobressalentes, apenas dá o feedback padrão
+    // Errou mas ainda tem chances restantes
     alert(mensagem);
     palpiteInput.value = "";
   }
