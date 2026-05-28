@@ -1,189 +1,289 @@
-  header{
-    display: flex;
-    font-family: 'Inter', sans-serif;
-    justify-content: space-between;
-    background-color: #ffffff;
-    color: #fff;
-    align-items: center;        
-    padding: 5px 40px;
+/* ─── GLOBAIS E ESTRUTURA BASE ─── */
+body {
+  margin: 0;
+  padding: 0;
+}
 
-  }
-  header h1{
+main {
+  /* O gradiente estilo GeoGuessr */
+  background-image: radial-gradient(
+    circle at 50% 30%,     
+    #251b4f 0%,            
+    #1a1a2e 50%,           
+    #10101c 100%           
+  );
   
-    display: flex;         /* Faz o ícone e o texto tratarem um ao outro como caixas flexíveis */
-    align-items: center;   /* Alinha o ícone e o texto perfeitamente pelo meio (vertical) */
-    gap: 12px;             /* Cria o espaço horizontal entre o ícone e o texto */
-    font-size: 10px;      /* Aumenta o tamanho da fonte para destacar o título */
-    font-family: 'Arial', sans-serif;
-    font-size: 1.8em;
-    color: #333;
-    margin-bottom: 10px;
-    
-  }
+  /* Garante que o main ocupe a tela toda e não corte o gradiente */
+  min-height: calc(100vh - 120px); /* Desconta o espaço do header e footer dinamicamente */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Centraliza a caixa de login perfeitamente no meio do gradiente */
+  padding: 40px 0;
+  box-sizing: border-box;
+}
 
+/* ─── HEADER (TOPO) ─── */
+header {
+  display: flex;
+  font-family: 'Inter', sans-serif;
+  justify-content: space-between;
+  background-color: #0E1326;
+  color: #fff;
+  align-items: center;        
+  padding: 5px 40px;
+}  
 
-  header img{
-    display: flex;
-    height: 40px;
-  }
+header h1 {
+  display: flex;         
+  align-items: center;   
+  gap: 12px;             
+  font-family: 'Inter', sans-serif;
+  font-size: 1.8em;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
 
+header h1 .logo {
+  height: 40px;
+  width: 40px;          
+  border-radius: 50%;   
+  object-fit: cover;    
+  background-color: #f0f0f0; 
+}
 
-    header a {
-    font-family: 'Inter', sans-serif; 
-    font-weight: 600;          
-    text-decoration: none; 
-    color: black;          
-    margin: 0px 15px;   
-    font-size: 1.1em;
-  }
+/* LINKS DO HEADER: Padrão estilo botão */
+header a {
+  font-family: 'Inter', sans-serif; 
+  font-weight: 600;
+  background-color: rgba(0, 0, 255, 0.37); /* Fundo azul do botão */
+  border-radius: 15px;
+  padding: 8px 16px;
+  text-decoration: none; 
+  color: rgb(255, 255, 255);          
+  margin: 0px 15px;   
+  font-size: 1.1em;
+  transition: background 0.2s;
+}
 
-body{
-    margin: 0;
-    padding: 0;
-      
-  }
+header a:hover {
+  background-color: rgba(0, 0, 255, 0.6); /* Efeito ao passar o mouse */
+}
 
-  main{
-    background-image: linear-gradient(to bottom, #0707078c ,#fcfffb60 );
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 90vh;
-    background-color: #E2E8F0;
-    /* 1. Mudamos de 'center' para 'flex-start' para mandar o conteúdo para cima */
-    justify-content: flex-start; 
+/* ─── TELA INICIAL (LOGIN / BOAS-VINDAS) ─── */
+
+/*  Aqui criamos a caixinha de fundo  */
+.container-central-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; 
   
-    /* 2. Usamos o padding para empurrar o conteúdo para baixo de forma controlada */
-    padding-top: 60px;
-
-  }
+  /* Estilização da caixa de fundo */
+  background-color: rgba(255, 255, 255, 0.08); /* Fundo branco bem translúcido */
+  backdrop-filter: blur(10px);                  /* Efeito de vidro fosco chique */
+  padding: 40px 30px;
+  border-radius: 20px;                          /* Cantos arredondados combinando com o jogo */
+  border: 1px solid rgba(255, 255, 255, 0.15);  /* Borda sutil brilhante */
+  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidade */
   
-.titulo-principal{
-    font-family: 'Arial', sans-serif;
-    font-size: 3.5em;
-    font-weight: 800;
-    color: #333;
-    margin-bottom: 20px;
-  }
+  /* Controla o tamanho da caixa na tela */
+  width: 100%;
+  max-width: 380px; 
+  margin: 40px auto;                            /* Centraliza e descola do header/footer */
+  gap: 60px;                                    /* Cria espaço automático entre TUDO que tá dentro da caixa */
+  height: 500px;                                /* diminui o tamanho da caixa*/
+}
+
+/* Ajustes nos títulos de dentro do login */
+.container-central-login h2 {
+  font-family: 'Inter', sans-serif;
+  color: #ffffff;
+  margin: 0 0 10px 0; /* Remove margens extras e deixa só um espacinho embaixo */
+  font-size: 1.8em;
+}
+
+/* Estilização dos inputs */
+input {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.0em;
+  padding: 12px 15px;      /* Aumentei um pouquinho o conforto interno */
+  border-radius: 8px;      /* Corrigido: coloquei 8px de arredondamento */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.9); /* Branco quase sólido para dar leitura */
+  color: #10101c;
+  width: 100%;             /* Faz o input respeitar o tamanho máximo da caixinha */
+  box-sizing: border-box;  /* Impede que o padding faça o input estourar para os lados */
+  transition: all 0.3s;
+}
+
+/* Efeito de foco quando o usuário clica para digitar */
+input:focus {
+  outline: none;
+  border-color: #4cd137;   /* Brilha com o verde do seu jogo */
+  box-shadow: 0 0 8px rgba(76, 209, 55, 0.5);
+}
+
+/* Estilização do botão de login */
+.botao-login {
+  font-family: 'Inter', sans-serif; 
+  font-weight: 600;
+  background-color: #4cd137; /* Troquei para o verde padrão do jogo para dar identidade */
+  border: none;
+  border-radius: 8px;
+  padding: 12px 0;
+  color: #0E1326;           /* Texto escuro para contrastar com o botão verde claro */
+  width: 100%;              /* Botão preenche a largura da caixa igual aos inputs */
+  margin-top: 10px;         /* Distancia um pouco mais do campo de senha */
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.botao-login:hover {
+  background-color: #ccff00; /* Vira o amarelo limão no hover */
+}
+
+.botao-login:active {
+  transform: scale(0.98);    /* Efeito de afundar de leve ao clicar */
+}
+
+/* ─── TELA DO JOGO ─── */
 #tela-inicial {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center; /* Garante que o texto também centralize */
-  width: 100%;       /* Ocupa a largura total para alinhar pelo meio da tela */
+  text-align: center; 
+  width: 100%;       
+}
+
+.titulo-principal {
+  font-family: 'Inter', sans-serif;
+  font-size: 4.5em;
+  font-weight: 800;
+  color: #ffffff; /* Ajustado para BRANCO para aparecer no fundo escuro */
+  margin-bottom: 40px;
 }
 
 .metade-amarela {
-    color: #ccff00;
-  }
+  color: #4cd137; /* Seu verde customizado */
+}
+
 .metade-verde { 
-    color: #4cd137;  
-  }
-
-  p{
-    font-family: 'Arial', sans-serif;
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #000000cb;
-    margin-bottom: 20px;
-    padding: 70px;  
-  }
-
-.escondido {
-    display: none !important;
+  color: #ffffff;  
 }
 
-  footer {
-  display: flex;
+#mensagem-inicial {
   font-family: 'Inter', sans-serif;
-  justify-content: space-between;
-  background-color: #ffffff;
-  align-items: center;        
-  padding: 20px 40px; /* Aumentei um pouco para desgrudar das bordas, igual ao header */
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 40px;
 }
 
-/* Modifique a regra atual do #tela-jogo para ficar assim: */
+/* Seletor genérico de parágrafo limpo para não estragar outras caixas */
+p {
+  font-family: 'Arial', sans-serif;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* ─── TELA DO JOGO ─── */
 #tela-jogo {
-    display: flex;
-    flex-direction: column;  /* Alinha o bloco do contador em cima do jogo */
-    align-items: center;     
-    justify-content: center;
-    width: 100%;
-    max-width: 900px;        
-    margin-top: 20px;
-    gap: 15px;               /* Espaço perfeito entre o contador e o jogo */
+  display: flex;
+  flex-direction: column;  
+  align-items: center;     
+  justify-content: center;
+  width: 100%;
+  max-width: 900px;        
+  margin-top: 20px;
+  gap: 15px;               
 }
 
- 
 .caixa-contador {
-    width: 100%;
-    text-align: center;
+  width: 100%;
+  text-align: center;
 }
 
-/* Remove o padding gigante apenas do seu contador de jogo */
 .caixa-contador p {
-    padding: 10px 0px !important; 
-    margin: 0;
-    font-size: 1.4em;
-    color: #333;
+  padding: 10px 0px !important; 
+  margin: 0;
+  font-size: 1.4em;
+  color: #ffffff; /* Ajustado para branco para ler no tema escuro */
 }
-
 
 .conteudo-jogo {
-    display: flex;
-    flex-direction: row;     /* Mantém a imagem e o input estritamente lado a lado */
-    align-items: center;     
-    justify-content: center; 
-    gap: 60px;               
-    width: 100%;
+  display: flex;
+  flex-direction: row;     /* Mantém lado a lado absoluto */
+  align-items: center;     
+  justify-content: center; 
+  gap: 60px;               
+  width: 100%;
 }
 
-/* Estilização da caixa da esquerda (onde a imagem vai ficar) */
 .caixa-imagem-api {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 15px;     /* Deixa os cantos arredondados */
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1); /* Dá um efeito de relevo na caixa */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 300px;            /* Tamanho fixo para a caixinha da imagem */
-    height: 300px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 15px;     
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;            
+  height: 300px;
 }
 
-img  {
-    max-width: 100%;
-    max-height: 100%;
+.caixa-imagem-api img {
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .caixa-palpite {
-    display: flex;
-    flex-direction: column;  /* Coloca o título, o input e o botão um embaixo do outro */
-    gap: 15px;
+  display: flex;
+  flex-direction: column;  
+  gap: 15px;
+  color: #ffffff;
 }
 
+/* ─── FOOTER (RODAPÉ) ─── */
+footer {
+  display: flex;
+  font-family: 'Inter', sans-serif;
+  justify-content: space-between;
+  background-color: #0E1326;
+  align-items: center;        
+  padding: 20px 40px; 
+}
 
-/* Alinhando o carrinho e o texto do rodapé */
 .footer-logo {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 1.8em; /* Deixa o texto do mesmo tamanho do antigo h1 */
-  font-weight: bold; /* Deixa o texto gordin como o logo */
-  color: #000000;
+  font-size: 1.8em; 
+  font-weight: bold; 
+  color: #ffffff;
 }
 
-.footer-logo img {
-  height: 40px; /* Controla o tamanho do carrinho no footer */
+.footer-logo img.logofooter {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #f0f0f0;
 }
 
-/* Estilizando os links da direita do rodapé */
 .footer-links a {
   font-family: 'Inter', sans-serif; 
   font-weight: 600;          
   text-decoration: none; 
-  color: black;          
+  color: rgb(255, 255, 255);          
   margin: 0px 15px;   
   font-size: 1.1em;
+}
+
+/* UTILITÁRIOS */
+.escondido {
+  display: none !important;
 }
