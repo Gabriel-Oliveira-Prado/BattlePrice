@@ -1,5 +1,6 @@
-import "../style.css";
-import { setupCounter } from "./counter.js"; 
+import "../css/style.css";
+import { fetchProdutoAleatorio, fetchCotacaoDolar } from "./api.js";
+import { JogoState } from "./game.js";
 
 const telaInicial = document.getElementById("tela-inicial");
 const telaJogo = document.getElementById("tela-jogo");
@@ -7,105 +8,183 @@ const imagemProduto = document.getElementById("imagem-produto");
 const btnChutar = document.getElementById("btn-chutar");
 const palpiteInput = document.getElementById("palpite-usuario");
 const elementoContador = document.getElementById("contador-chances");
+const spinner = document.getElementById("loading-spinner");
+const dicaSeta = document.getElementById("dica-seta");
 
-let precoReal = 0;
-let nomeProduto = "";
+// SweetAlert2 Toast Config
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  background: '#1e293b', // Match the slate theme
+  color: '#fff',
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+});
 
-// Função para descobrir quantas chances ainda restam olhando o texto do elemento
-function obterChancesAtuais() {
-  // Se o texto contiver "Você tem 3", extrai o número 3. Se contiver "Acabaram", retorna 0.
-  const texto = elementoContador.innerText;
-  if (texto.includes("Acabaram")) return 0;
-  const match = texto.match(/\d+/);
-  return match ? parseInt(match[0], 10) : 0;
+const jogo = new JogoState(3);
+
+function atualizarContadorNaTela() {
+  elementoContador.innerHTML = jogo.obterMensagemChances();
 }
 
 async function carregarProduto() {
-  const categorias = ["electronics", "jewelery", "men's clothing", "women's clothing"];
-  const categoria = categorias[Math.floor(Math.random() * categorias.length)];
+  try {
+    // Estado de Loading
+    if (spinner) spinner.style.display = 'block';
+    imagemProduto.style.display = 'none';
+    btnChutar.disabled = true;
+    palpiteInput.disabled = true;
+    if (dicaSeta) dicaSeta.innerHTML = '';
 
-  const res = await fetch(`https://fakestoreapi.com/products/category/${encodeURIComponent(categoria)}`);
-  const produtos = await res.json();
-  const item = produtos[Math.floor(Math.random() * produtos.length)];
+    // Busca dados
+    const cotacao = await fetchCotacaoDolar();
+    const item = await fetchProdutoAleatorio();
 
-  const cotacao = 5.7;
-  precoReal = parseFloat((item.price * cotacao).toFixed(2));
-  nomeProduto = item.title;
+    const precoReal = parseFloat((item.price * cotacao).toFixed(2));
+    jogo.setProduto(precoReal, item.title);
 
-  imagemProduto.src = item.image;
-  imagemProduto.alt = item.title;
+    // Atualiza Imagem
+    imagemProduto.onload = () => {
+      if (spinner) spinner.style.display = 'none';
+      imagemProduto.style.display = 'block';
+      btnChutar.disabled = false;
+      palpiteInput.disabled = false;
+      palpiteInput.focus();
+    };
+    imagemProduto.src = item.image;
+    imagemProduto.alt = item.title;
 
-  const nomeEl = document.getElementById("nome-produto");
-  if (nomeEl) nomeEl.textContent = item.title;
+  } catch (err) {
+    if (spinner) spinner.style.display = 'none';
+    Toast.fire({ icon: 'error', title: 'Erro ao carregar produto. Tentando novamente...' });
+    // Tenta carregar novamente em caso de falha após 2 segundos
+    setTimeout(carregarProduto, 2000);
+  }
 }
 
-// ── Ao clicar na tela inicial ──
-telaInicial.addEventListener("click", async function () {
-  telaInicial.classList.add("escondido");
-  telaJogo.classList.remove("escondido");
-  await carregarProduto();
-});
+function processarPalpite() {
+  if (btnChutar.disabled) return; // Proteção contra múltiplos cliques no loading
 
-// ── Ao chutar o preço ──
-btnChutar.addEventListener("click", function () {
-  
-  // SE AS CHANCES JÁ ACABARAM: Avança para o próximo produto
-  if (obterChancesAtuais() === 0) {
-    elementoContador.resetCounter(); // REINICIA para 3 chances de verdade
-    carregarProduto();        
-    btnChutar.textContent = "Chutar Preço"; 
+  if (jogo.acabou()) {
+    jogo.resetarChances();
+    atualizarContadorNaTela();
+    btnChutar.textContent = "Chutar Preço";
     palpiteInput.value = "";
-    palpiteInput.disabled = false; 
+    carregarProduto();        
     return;
   }
 
   const palpite = parseFloat(palpiteInput.value);
   if (!palpite || palpite <= 0) return;
 
-  const diff = (Math.abs(palpite - precoReal) / precoReal) * 100;
+  const diff = jogo.calcularDiferenca(palpite);
   let mensagem = "";
+  let icon = 'info';
   let acertou = false;
 
   if (diff <= 5) {
-    mensagem = `🎯 Incrível! Acertou! O preço era R$ ${precoReal.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
+    mensagem = `Acertou! O preço era R$ ${jogo.precoReal.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`;
+    icon = 'success';
     acertou = true;
   } else {
-    // Se errou, diminui 1 chance usando o clique
-    elementoContador.click(); 
+    jogo.registrarErro();
+    atualizarContadorNaTela();
     
     if (diff <= 20) {
-      mensagem = `🔥 Quase! (você errou ${diff.toFixed(1)}%)`;
+      mensagem = `Quase! (errou ${diff.toFixed(1)}%)`;
+      icon = 'warning';
     } else {
-      mensagem = `❌ Longe! (você errou ${diff.toFixed(1)}%)`;
+      mensagem = "";
+      icon = 'error';
     }
   }
 
-  // ── VERIFICAÇÃO APÓS O CHUTE ──
   if (acertou) {
-    alert(mensagem);
-    elementoContador.resetCounter(); // 🎯 SE ACERTOU: Volta o contador para 3 na hora!
-    carregarProduto();               // Carrega o próximo item
+    Toast.fire({ icon, title: mensagem });
+    jogo.resetarChances();
+    atualizarContadorNaTela();
+    carregarProduto();
     palpiteInput.value = "";
-  } else if (obterChancesAtuais() === 0) {
-    // Se as chances zeraram com o erro atual:
-    const precoFormatado = precoReal.toLocaleString("pt-BR", { minimumFractionDigits: 2 });
+  } else if (jogo.acabou()) {
+    if (dicaSeta) dicaSeta.innerHTML = '';
+    const precoFormatado = jogo.precoReal.toLocaleString("pt-BR", { minimumFractionDigits: 2 });
     
     elementoContador.innerHTML = `
-      <span style="color: #ff1900; display: block; margin-bottom: 5px; font-weight: bold;">Acabaram suas chances!</span>
-      <span style="color: #09ff00; font-size: 1.2em;">O preço correto era <strong>R$ ${precoFormatado}</strong></span>
+      <span style="color: #ef4444; display: block; margin-bottom: 5px; font-weight: bold;">Acabaram suas chances!</span>
+      <span style="color: #22c55e; font-size: 1.2em;">Era <strong>R$ ${precoFormatado}</strong></span>
     `;
 
-    btnChutar.textContent = "Ver Próximo Produto";
+    btnChutar.textContent = "Ver Próximo";
     palpiteInput.disabled = true;
     
-    alert(`${mensagem}\nSuas chances acabaram! O preço correto foi revelado na tela.`);
+    Toast.fire({ icon: 'error', title: 'Suas chances acabaram!' });
   } else {
-    // Errou mas ainda tem chances restantes
-    alert(mensagem);
+    if (dicaSeta) {
+      if (palpite < jogo.precoReal) {
+        dicaSeta.innerHTML = '<i class="bi bi-arrow-up-circle-fill text-success" title="O preço é maior!"></i>';
+      } else {
+        dicaSeta.innerHTML = '<i class="bi bi-arrow-down-circle-fill text-danger" title="O preço é menor!"></i>';
+      }
+    }
+    if (mensagem) {
+      Toast.fire({ icon, title: mensagem });
+    }
     palpiteInput.value = "";
+    palpiteInput.focus();
+  }
+}
+
+// Inicia o jogo automaticamente quando a página carrega
+document.addEventListener("DOMContentLoaded", async () => {
+  if (telaJogo) {
+    atualizarContadorNaTela();
+    await carregarProduto();
   }
 });
 
-if (elementoContador) {
-  setupCounter(elementoContador);
-}
+btnChutar.addEventListener("click", processarPalpite);
+
+// Suporte para tecla Enter no input
+palpiteInput.addEventListener("keyup", function(event) {
+  if (event.key === "Enter") {
+    processarPalpite();
+  }
+});
+
+// Impede a digitação da letra "e" e sinais matemáticos no input number
+palpiteInput.addEventListener("keydown", function(event) {
+  if (["e", "E", "+", "-"].includes(event.key)) {
+    event.preventDefault();
+  }
+});
+
+// Intercept exit links during gameplay
+const linksSaida = document.querySelectorAll('header a');
+linksSaida.forEach(link => {
+  link.addEventListener('click', function(e) {
+    if (!telaJogo.classList.contains("escondido")) {
+      e.preventDefault();
+      Swal.fire({
+        title: 'Tem certeza que deseja sair?',
+        text: "Seu progresso atual será perdido!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#ef4444',
+        cancelButtonColor: '#3b82f6',
+        confirmButtonText: 'Sim, sair',
+        cancelButtonText: 'Cancelar',
+        background: '#1e293b',
+        color: '#fff'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = this.href;
+        }
+      });
+    }
+  });
+});

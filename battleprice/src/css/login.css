@@ -1,70 +1,93 @@
 /* ─── TELA INICIAL (LOGIN / BOAS-VINDAS) ─── */
-
 .container-central-login {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center; 
-  
-  background-color: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  padding: 40px 30px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3);
-  
+  text-align: center;
+
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+
+  padding: 50px 40px;
+  border-radius: 12px;
+
   width: 100%;
-  max-width: 380px; 
-  margin: 40px auto;
-  gap: 60px;
-  height: 500px;
+  max-width: 420px;
+  margin: 20px auto;
 }
 
 .container-central-login h2 {
-  font-family: 'Inter', sans-serif;
-  color: #ffffff;
-  margin: 0 0 10px 0;
-  font-size: 1.8em;
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-light);
+  margin-bottom: 30px;
+  font-size: 2.2em;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.btn-voltar {
+  top: 25px;
+  left: 25px;
+  transition: opacity 0.2s;
+}
+.btn-voltar:hover {
+  opacity: 0.7;
+}
+
+.container-central-login form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
 }
 
 input {
   font-family: 'Inter', sans-serif;
-  font-size: 1.0em;
-  padding: 12px 15px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background-color: rgba(255, 255, 255, 0.9);
-  color: #10101c;
+  font-size: 1em;
+  padding: 15px 18px;
+  border-radius: 6px;
+  border: 1px solid var(--glass-border);
+  background-color: rgba(0, 0, 0, 0.2);
+  color: var(--text-light);
   width: 100%;
   box-sizing: border-box;
-  transition: all 0.3s;
 }
 
 input:focus {
   outline: none;
-  border-color: #4cd137;
-  box-shadow: 0 0 8px rgba(76, 209, 55, 0.5);
+  border-color: var(--primary-color);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
-.botao-login, .container-central-login button {
-  font-family: 'Inter', sans-serif; 
+.botao-login,
+.container-central-login button {
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
-  background-color: #4cd137;
+  background-color: var(--primary-color);
   border: none;
-  border-radius: 8px;
-  padding: 12px 0;
-  color: #0E1326;
+  border-radius: 4px;
+  padding: 15px 0;
+  color: #ffffff;
   width: 100%;
   margin-top: 10px;
   font-size: 1.1em;
   cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
+  letter-spacing: 0.5px;
 }
 
-.botao-login:hover, .container-central-login button:hover {
-  background-color: #ccff00;
+.botao-login:hover,
+.container-central-login button:hover {
+  background-color: var(--primary-hover);
 }
 
-.botao-login:active, .container-central-login button:active {
-  transform: scale(0.98);
+.link-destaque {
+  color: var(--accent-color);
+}
+
+.link-destaque:hover {
+  color: #f472b6;
+  /* Lighter pink for hover */
 }

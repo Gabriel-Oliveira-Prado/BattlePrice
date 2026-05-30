@@ -1,27 +1,48 @@
 /* ─── HEADER (TOPO) E FOOTER (RODAPÉ) ─── */
-header {
+header.main-header, footer {
+  background-color: rgba(49, 46, 129, 0.95) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   font-family: 'Inter', sans-serif;
-}  
-
-header h1 {
-  font-family: 'Inter', sans-serif;
-}
-
-/* LINKS DO HEADER E FOOTER: Padrão estilo botão (agora também com Bootstrap, mas mantendo hover se quiser) */
-header a, .footer-links a {
-  font-family: 'Inter', sans-serif; 
-  font-weight: 600;
-  transition: background 0.2s;
-}
-
-header a:hover {
-  background-color: rgba(0, 0, 255, 0.6) !important;
+  border-bottom: 1px solid var(--glass-border);
 }
 
 footer {
-  font-family: 'Inter', sans-serif;
+  border-top: 1px solid var(--glass-border);
+  border-bottom: none;
 }
 
-.footer-logo {
-  font-family: 'Inter', sans-serif;
+header h1 a {
+  color: var(--text-light) !important;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+header h1 a:hover {
+  opacity: 0.8;
+}
+
+/* NAV ACTION BUTTON */
+header a.btn-action {
+  font-family: 'Inter', sans-serif; 
+  font-weight: 600;
+  color: #ffffff !important;
+  background-color: var(--primary-color) !important;
+  border: none !important;
+  border-radius: 4px;
+  padding: 10px 24px !important;
+  letter-spacing: 0.5px;
+}
+
+header a.btn-action:hover {
+  background-color: var(--primary-hover) !important;
+}
+
+/* LINKS DO FOOTER */
+footer a {
+  color: var(--text-muted) !important;
+}
+
+footer a:hover {
+  color: var(--text-light) !important;
 }

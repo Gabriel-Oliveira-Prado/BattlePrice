@@ -1,17 +1,29 @@
-/* ─── GLOBAIS E ESTRUTURA BASE ─── */
+:root {
+  --bg-base: #0f172a;
+  --bg-gradient: radial-gradient(circle at top, #312e81 0%, #0f172a 100%);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --text-light: #f8fafc;
+  --text-muted: #94a3b8;
+  --primary-color: #22c55e; /* Money green */
+  --primary-hover: #16a34a;
+  --accent-color: #eab308; /* Gold */
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: 'Inter', sans-serif;
+  background-color: var(--bg-base);
+  color: var(--text-light);
+}
+
+h1, h2, h3, h4, h5, h6, .titulo-principal {
+  font-family: 'Outfit', sans-serif;
 }
 
 main {
-  /* O gradiente estilo GeoGuessr */
-  background-image: radial-gradient(circle at 50% 30%,
-      #251b4f 0%,
-      #1a1a2e 50%,
-      #10101c 100%);
-
+  background-image: var(--bg-gradient);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,7 +32,31 @@ main {
   box-sizing: border-box;
 }
 
-/* UTILITÁRIOS */
+/* UTILITÁRIOS globais */
 .escondido {
   display: none !important;
+}
+
+.logo-bg {
+  background-color: transparent;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+a, button, input {
+  transition: all 0.3s ease;
+}
+
+::placeholder {
+  color: rgba(255, 255, 255, 0.8) !important;
+  opacity: 1 !important;
+}
+
+@keyframes slideUpFade {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up {
+  animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

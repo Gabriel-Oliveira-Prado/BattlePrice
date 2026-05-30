@@ -1,53 +1,71 @@
-/* ─── TELA DO JOGO ─── */
+/* ─── TELAS DE BOAS VINDAS E JOGO ─── */
+.tela-inicial-click {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  transition: transform 0.3s ease;
+}
+
+.tela-inicial-click:hover {
+  transform: scale(1.02);
+}
+
 #tela-inicial {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center; 
-  width: 100%;       
+  text-align: center;
+  width: 100%;
 }
 
 .titulo-principal {
   font-family: 'Inter', sans-serif;
-  font-size: 4.5em;
-  font-weight: 800;
-  color: #ffffff;
-  margin-bottom: 40px;
+  font-size: 5.5em;
+  font-weight: 900;
+  color: var(--text-light);
+  margin-bottom: 10px;
+  letter-spacing: -2px;
 }
 
-.metade-amarela {
-  color: #4cd137;
+.texto-battle {
+  color: var(--accent-color);
+  /* Gold */
 }
 
-.metade-verde { 
-  color: #ffffff;  
+.texto-price {
+  color: var(--primary-color);
+  /* Green */
 }
 
 #mensagem-inicial {
   font-family: 'Inter', sans-serif;
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #ffffff;
+  font-size: 1.2em;
+  font-weight: 500;
+  color: var(--text-muted);
   margin-bottom: 40px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 p {
-  font-family: 'Arial', sans-serif;
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1em;
+  color: var(--text-muted);
   margin: 0;
 }
 
+/* ─── TELA DO JOGO ─── */
 #tela-jogo {
   display: flex;
-  flex-direction: column;  
-  align-items: center;     
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 900px;        
-  margin-top: 20px;
-  gap: 15px;               
+  max-width: 900px;
+  margin-top: 10px;
+  gap: 25px;
 }
 
 .caixa-contador {
@@ -56,54 +74,121 @@ p {
 }
 
 .caixa-contador p {
-  padding: 10px 0px !important; 
-  margin: 0;
-  font-size: 1.4em;
-  color: #ffffff;
+  padding: 12px 30px !important;
+  margin: 0 auto;
+  font-size: 1.1em;
+  font-weight: 600;
+  color: var(--text-light);
+  background-color: var(--glass-bg);
+  border-radius: 30px;
+  display: inline-block;
+  border: 1px solid var(--glass-border);
 }
 
 .conteudo-jogo {
   display: flex;
   flex-direction: row;
-  align-items: center;     
-  justify-content: center; 
-  gap: 60px;               
+  align-items: stretch;
+  justify-content: center;
+  gap: 50px;
   width: 100%;
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  padding: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
 .caixa-imagem-api {
-  background-color: #ffffff;
+  background-color: #FFFFFF;
   padding: 20px;
-  border-radius: 15px;     
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3); 
+  border-radius: 8px;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 300px;            
-  height: 300px;
+  width: 320px;
+  height: 320px;
 }
 
 .caixa-imagem-api img {
   max-width: 100%;
   max-height: 100%;
+  object-fit: contain;
 }
 
 .caixa-palpite {
   display: flex;
-  flex-direction: column;  
-  gap: 15px;
-  color: #ffffff;
+  flex-direction: column;
+  gap: 20px;
+  color: var(--text-light);
+  justify-content: center;
+  flex: 1;
+}
+
+.caixa-palpite h3 {
+  font-size: 1.6em;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: var(--text-light);
+  letter-spacing: -0.5px;
 }
 
 #btn-chutar {
   font-family: 'Inter', sans-serif;
-  font-weight: bold;
-  padding: 10px;
-  border-radius: 8px;
-  background-color: #4cd137;
+  font-weight: 600;
+  padding: 15px;
+  border-radius: 4px;
+  background-color: var(--primary-color);
+  color: #ffffff;
   border: none;
   cursor: pointer;
+  font-size: 1.1em;
+  letter-spacing: 0.5px;
 }
+
 #btn-chutar:hover {
-  background-color: #ccff00;
+  background-color: var(--primary-hover);
+}
+
+/* RESPONSIVIDADE MOBILE */
+@media (max-width: 768px) {
+  .conteudo-jogo {
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .caixa-imagem-api {
+    width: 100%;
+    max-width: 250px;
+    height: 250px;
+    margin: 0 auto;
+  }
+
+  /* Ajuste de fontes para não quebrar a tela no celular */
+  .titulo-principal {
+    font-size: 3.2em;
+  }
+
+  #mensagem-inicial {
+    font-size: 0.9em;
+    margin-bottom: 20px;
+  }
+
+  .caixa-palpite h3 {
+    font-size: 1.25em;
+    text-align: center;
+  }
+
+  .caixa-contador p {
+    font-size: 0.95em;
+    padding: 8px 20px !important;
+  }
+}
+
+#contador-chances {
+  padding: 0;
+  margin-bottom: 10px;
 }
