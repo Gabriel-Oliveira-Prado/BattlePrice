@@ -5,9 +5,11 @@
   --glass-border: rgba(255, 255, 255, 0.08);
   --text-light: #f8fafc;
   --text-muted: #94a3b8;
-  --primary-color: #22c55e; /* Money green */
+  --primary-color: #22c55e;
+  /* Money green */
   --primary-hover: #16a34a;
-  --accent-color: #eab308; /* Gold */
+  --accent-color: #eab308;
+  /* Gold */
 }
 
 body {
@@ -18,7 +20,13 @@ body {
   color: var(--text-light);
 }
 
-h1, h2, h3, h4, h5, h6, .titulo-principal {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.titulo-principal {
   font-family: 'Outfit', sans-serif;
 }
 
@@ -43,7 +51,9 @@ main {
   border-radius: 8px;
 }
 
-a, button, input {
+a,
+button,
+input {
   transition: all 0.3s ease;
 }
 
@@ -53,8 +63,15 @@ a, button, input {
 }
 
 @keyframes slideUpFade {
-  0% { opacity: 0; transform: translateY(40px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-slide-up {
