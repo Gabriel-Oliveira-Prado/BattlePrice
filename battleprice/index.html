@@ -7,6 +7,7 @@
     <!-- Link para o seu CSS principal -->
     <link rel="shortcut icon" href="Iconecarrinho.png" type="image/x-icon">
     <link rel="stylesheet" href="/src/style.css">
+      
     
 </head>
 <body>
@@ -17,23 +18,41 @@
     </h1>
     
     <nav class="header-links">
-        <a href="#">Cadastrar</a>
+        <a href="login.html">Login</a>
         <a href="#">Entrar</a>
     </nav>
 </header>
 
-<main class="container-central-login">
-    
-        <h2>Faça seu login</h2>
-        <input type="text" placeholder="Email">
-        <input type="password" placeholder="Senha">
-        <button class="botao-login" id="botao-login">Entrar</button>
-        <a href="jogo.html">Jogar</a> # para ir para a proxima tela, depois de clicar no botão de login
+<main class="container-central">
 
+    <div id="tela-inicial">
+        <h2 class="titulo-principal">
+            <span class="metade-amarela">Battle</span><span class="metade-verde">Price</span>
+        </h2>
+        <p id="mensagem-inicial">clique em qualquer lugar para começar!</p>
+    </div>
+    
+    <div id="tela-jogo" class="escondido">
+    
+    <div class="caixa-contador">
+        <p id="contador-chances" style="padding: 0; margin-bottom: 10px;"></p>
+    </div>
+
+    <div class="conteudo-jogo">
+        <div class="caixa-imagem-api">
+            <img src=" " alt="Item do Jogo" id="imagem-produto">
+        </div>
+
+        <div class="caixa-palpite">
+            <h3>Qual é o preço deste item?</h3>
+            <input type="number" id="palpite-usuario" placeholder="Digite o valor em R$">
+            <button id="btn-chutar">Chutar Preço</button>
+        </div>
+    </div>
+
+</div>
 
 </main>
-
-
 <footer>
     <div class="footer-logo">
         <img src="iconecarrinho.png" alt="Logo do BattlePrice" class="logofooter">
@@ -41,11 +60,11 @@
     </div>
 
     <nav class="footer-links">
-        <a href="#">Quem somos?</a>
+        <a href="#">GitHub</a>
         <a href="#">Termos De Uso</a>
     </nav>
 </footer>
- <script type="module" src="/src/main.js"></script>  
+   
 </body>
 </html>
 

@@ -5,7 +5,7 @@ body {
 }
 
 main {
-  /* O gradiente estilo GeoGuessr */
+  /* O gradiente   estilo GeoGuessr */
   background-image: radial-gradient(
     circle at 50% 30%,     
     #251b4f 0%,            
@@ -73,7 +73,7 @@ header a:hover {
 /* ─── TELA INICIAL (LOGIN / BOAS-VINDAS) ─── */
 
 /*  Aqui criamos a caixinha de fundo  */
-.container-central-login {
+.container-login {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -281,6 +281,7 @@ footer {
   color: rgb(255, 255, 255);          
   margin: 0px 15px;   
   font-size: 1.1em;
+  transition: background 0.2s;
 }
 
 /* UTILITÁRIOS */
