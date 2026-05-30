@@ -1,0 +1,26 @@
+/* ─── GLOBAIS E ESTRUTURA BASE ─── */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+main {
+  /* O gradiente estilo GeoGuessr */
+  background-image: radial-gradient(circle at 50% 30%,
+      #251b4f 0%,
+      #1a1a2e 50%,
+      #10101c 100%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  box-sizing: border-box;
+}
+
+/* UTILITÁRIOS */
+.escondido {
+  display: none !important;
+}

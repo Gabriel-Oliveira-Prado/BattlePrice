@@ -1,0 +1,109 @@
+/* ─── TELA DO JOGO ─── */
+#tela-inicial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; 
+  width: 100%;       
+}
+
+.titulo-principal {
+  font-family: 'Inter', sans-serif;
+  font-size: 4.5em;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 40px;
+}
+
+.metade-amarela {
+  color: #4cd137;
+}
+
+.metade-verde { 
+  color: #ffffff;  
+}
+
+#mensagem-inicial {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 40px;
+}
+
+p {
+  font-family: 'Arial', sans-serif;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #ffffff;
+  margin: 0;
+}
+
+#tela-jogo {
+  display: flex;
+  flex-direction: column;  
+  align-items: center;     
+  justify-content: center;
+  width: 100%;
+  max-width: 900px;        
+  margin-top: 20px;
+  gap: 15px;               
+}
+
+.caixa-contador {
+  width: 100%;
+  text-align: center;
+}
+
+.caixa-contador p {
+  padding: 10px 0px !important; 
+  margin: 0;
+  font-size: 1.4em;
+  color: #ffffff;
+}
+
+.conteudo-jogo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;     
+  justify-content: center; 
+  gap: 60px;               
+  width: 100%;
+}
+
+.caixa-imagem-api {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 15px;     
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;            
+  height: 300px;
+}
+
+.caixa-imagem-api img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.caixa-palpite {
+  display: flex;
+  flex-direction: column;  
+  gap: 15px;
+  color: #ffffff;
+}
+
+#btn-chutar {
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #4cd137;
+  border: none;
+  cursor: pointer;
+}
+#btn-chutar:hover {
+  background-color: #ccff00;
+}

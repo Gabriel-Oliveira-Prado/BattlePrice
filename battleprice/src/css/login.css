@@ -1,0 +1,70 @@
+/* ─── TELA INICIAL (LOGIN / BOAS-VINDAS) ─── */
+
+.container-central-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; 
+  
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  padding: 40px 30px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3);
+  
+  width: 100%;
+  max-width: 380px; 
+  margin: 40px auto;
+  gap: 60px;
+  height: 500px;
+}
+
+.container-central-login h2 {
+  font-family: 'Inter', sans-serif;
+  color: #ffffff;
+  margin: 0 0 10px 0;
+  font-size: 1.8em;
+}
+
+input {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.0em;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #10101c;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.3s;
+}
+
+input:focus {
+  outline: none;
+  border-color: #4cd137;
+  box-shadow: 0 0 8px rgba(76, 209, 55, 0.5);
+}
+
+.botao-login, .container-central-login button {
+  font-family: 'Inter', sans-serif; 
+  font-weight: 600;
+  background-color: #4cd137;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 0;
+  color: #0E1326;
+  width: 100%;
+  margin-top: 10px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.botao-login:hover, .container-central-login button:hover {
+  background-color: #ccff00;
+}
+
+.botao-login:active, .container-central-login button:active {
+  transform: scale(0.98);
+}

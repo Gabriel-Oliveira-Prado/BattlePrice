@@ -1,0 +1,27 @@
+/* ─── HEADER (TOPO) E FOOTER (RODAPÉ) ─── */
+header {
+  font-family: 'Inter', sans-serif;
+}  
+
+header h1 {
+  font-family: 'Inter', sans-serif;
+}
+
+/* LINKS DO HEADER E FOOTER: Padrão estilo botão (agora também com Bootstrap, mas mantendo hover se quiser) */
+header a, .footer-links a {
+  font-family: 'Inter', sans-serif; 
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+header a:hover {
+  background-color: rgba(0, 0, 255, 0.6) !important;
+}
+
+footer {
+  font-family: 'Inter', sans-serif;
+}
+
+.footer-logo {
+  font-family: 'Inter', sans-serif;
+}
