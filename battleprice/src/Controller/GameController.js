@@ -1,4 +1,4 @@
-const DbController = require('./AuthDbController');
+import sqlite3 from './DbController.js'; // Importa o controlador de banco de dados para acessar a função getDb()
 
 const GameController = {
   // ==========================================
@@ -9,10 +9,9 @@ const GameController = {
       const { pontos } = req.body;
       const userId = req.userId; // Esse ID virá do seu Middleware de autenticação JWT
 
-      const db = DbController.getDb();
+      const db = getDb();
 
       // Atualiza os pontos se a nova pontuação for maior que a antiga (exemplo de Recorde)
-      // Ou você pode apenas somar os pontos usando: pontos = pontos + ?
       await db.run(
         'UPDATE ranking SET pontos = ? WHERE user_id = ? AND ? > pontos',
         [pontos, userId, pontos]
@@ -29,10 +28,9 @@ const GameController = {
   // ==========================================
   async buscarRanking(req, res) {
     try {
-      const db = DbController.getDb();
+      const db = getDb();
 
-      // O comando JOIN junta o Nome do usuário com a Pontuação dele
-      // O ORDER BY pontos DESC garante que o maior vá para o topo
+      // O comando JOIN junta o Nome do usuário com a Pontuação dele, e ordena do maior para o menor
       const leaderboard = await db.all(`
         SELECT users.nome, ranking.pontos 
         FROM ranking 
@@ -49,4 +47,4 @@ const GameController = {
   }
 };
 
-module.exports = GameController;
+export default GameController;

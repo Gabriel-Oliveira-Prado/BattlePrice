@@ -38,20 +38,19 @@
             <a href="login.html" class="btn-voltar position-absolute text-white fs-4"><i
                     class="bi bi-arrow-left"></i></a>
             <h2><i class="bi bi-person-plus-fill me-2"></i>Cadastro</h2>
-            <form class="w-100 d-flex flex-column gap-3">
+            <form class="w-100 d-flex flex-column gap-3" method="POST" action="http://localhost:3000/api/cadastro">
                 <input type="text" class="form-control bg-transparent text-white border-secondary" placeholder="Nome:"
-                    aria-label="Nome" required>
+                    aria-label="Nome" name = "nome" required>
                 <input type="email" class="form-control bg-transparent text-white border-secondary" placeholder="Email:"
-                    aria-label="E-mail" required>
+                    aria-label="E-mail" name = "email" required>
                 <div class="position-relative w-100">
                     <input type="password" id="senhaInput"
                         class="form-control bg-transparent text-white border-secondary" placeholder="Senha:"
-                        aria-label="Senha" style="padding-right: 45px;" required>
+                        aria-label="Senha" name = "senha" style="padding-right: 45px;" required>
                     <i class="bi bi-eye position-absolute text-white" id="togglePassword"
                         style="right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; opacity: 0.7; font-size: 1.2rem;"></i>
                 </div>
-                <button type="button" class="botao-login w-100 mt-2"
-                    onclick="window.location.href='login.html'">Cadastrar</button>
+                <button type="submit" class="botao-login w-100 mt-2">Cadastrar</button>
                 <p class="mt-3 mb-0 text-white w-100">Já tem uma conta? <a href="login.html"
                         class="link-destaque text-decoration-none fw-bold">Entrar</a></p>
             </form>

@@ -1,6 +1,10 @@
-const sqlite3 = require('sqlite3');
-const { open } = require('sqlite');
-const path = require('path');
+import sqlite3 from 'sqlite3'; 
+import { open } from 'sqlite'; 
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 let dbInstance = null;
 
@@ -8,8 +12,8 @@ const DbController = {
   async initDatabase() {
     try {
       dbInstance = await open({
-        filename: path.join(__dirname, '../../database.sqlite'),
-        driver: sqlite3.Database
+        filename: path.join(__dirname, '../../battleprice.sqlite'),
+        driver: sqlite3.Database 
       });
 
       // 1. Tabela de Usuários
@@ -47,4 +51,4 @@ const DbController = {
   }
 };
 
-module.exports = DbController;
+export default DbController;

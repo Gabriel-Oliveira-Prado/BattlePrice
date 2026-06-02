@@ -1,6 +1,6 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const DbController = require('./DbController'); // Importa o seu DbController
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import DbController from './DbController.js';
 
 const JWT_SECRET = 'sua_chave_secreta_super_segura'; //usar o dotenv para alterar isso
 
@@ -10,6 +10,7 @@ const authController = {
   // ==========================================
   async register(req, res) {
     try {
+      
       const { nome, email, senha } = req.body;
       const db = DbController.getDb(); // Pega a instância do banco
 
@@ -18,7 +19,6 @@ const authController = {
       }
 
       // 1. Verificar no SQLite se o e-mail já existe
-      // db.get retorna a primeira linha encontrada ou 'undefined'
       const userExists = await db.get('SELECT * FROM users WHERE email = ?', [email]);
       
       if (userExists) {
@@ -29,8 +29,8 @@ const authController = {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(senha, salt);
 
-      // 3. Salvar no banco usando o db.run (para INSERT, UPDATE, DELETE)
-      const userId = Date.now().toString(); // ID Simples (você pode usar crypto.randomUUID() se preferir)
+      // 3. Salvar no banco usando o db.run 
+      const userId = Date.now().toString();
       
       await db.run(
         'INSERT INTO users (id, nome, email, senha) VALUES (?, ?, ?, ?)',
@@ -59,7 +59,7 @@ const authController = {
   async login(req, res) {
     try {
       const { email, senha } = req.body;
-      const db = DbController.getDb(); // Pega a instância do banco
+      const db = DbController.getDb(); 
 
       if (!email || !senha) {
         return res.status(400).json({ erro: 'E-mail e senha são obrigatórios.' });
@@ -68,7 +68,6 @@ const authController = {
       // 1. Buscar o usuário pelo e-mail no SQLite
       const user = await db.get('SELECT * FROM users WHERE email = ?', [email]);
       
-      // Se não achar o usuário, retorna erro genérico por segurança
       if (!user) {
         return res.status(401).json({ erro: 'Credenciais inválidas.' });
       }
@@ -83,6 +82,7 @@ const authController = {
       const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '1d' });
 
       return res.status(200).json({
+        //Adicionar um redrect para a página do jogo aqui, ou fazer isso no front-end após receber a resposta de sucesso
         mensagem: 'Login realizado com sucesso!',
         token,
         usuario: { id: user.id, nome: user.nome, email: user.email }
@@ -95,4 +95,4 @@ const authController = {
   }
 };
 
-module.exports = authController;
+export default authController;
