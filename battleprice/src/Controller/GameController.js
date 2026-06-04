@@ -1,4 +1,6 @@
-import sqlite3 from './DbController.js'; // Importa o controlador de banco de dados para acessar a função getDb()
+import DbController from "./DbController.js"; // Importa o controlador de banco de dados para acessar a função getDb()
+
+const getDb = () => DbController.getDb();
 
 const GameController = {
   // ==========================================
@@ -13,13 +15,13 @@ const GameController = {
 
       // Atualiza os pontos se a nova pontuação for maior que a antiga (exemplo de Recorde)
       await db.run(
-        'UPDATE ranking SET pontos = ? WHERE user_id = ? AND ? > pontos',
-        [pontos, userId, pontos]
+        "UPDATE ranking SET pontos = ? WHERE user_id = ? AND ? > pontos",
+        [pontos, userId, pontos],
       );
 
-      return res.status(200).json({ mensagem: 'Pontuação atualizada!' });
+      return res.status(200).json({ mensagem: "Pontuação atualizada!" });
     } catch (error) {
-      return res.status(500).json({ erro: 'Erro ao salvar pontos.' });
+      return res.status(500).json({ erro: "Erro ao salvar pontos." });
     }
   },
 
@@ -42,9 +44,9 @@ const GameController = {
       return res.status(200).json(leaderboard);
     } catch (error) {
       console.error(error);
-      return res.status(500).json({ erro: 'Erro ao buscar ranking.' });
+      return res.status(500).json({ erro: "Erro ao buscar ranking." });
     }
-  }
+  },
 };
 
 export default GameController;
