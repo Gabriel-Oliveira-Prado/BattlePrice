@@ -28,7 +28,7 @@
         </h1>
 
         <nav class="nav d-flex align-items-center gap-3">
-            <a class="text-white text-decoration-none fw-bold d-flex align-items-center gap-1" href="#"><i
+            <a class="text-white text-decoration-none fw-bold d-flex align-items-center gap-1" href="#" id="placar-btn"><i
                     class="bi bi-trophy-fill text-warning"></i> Placar</a>
             <a class="nav-link text-white btn-action" href="login.html">Entrar</a>
         </nav>
@@ -39,7 +39,7 @@
             <a href="login.html" class="btn-voltar position-absolute text-white fs-4"><i
                     class="bi bi-arrow-left"></i></a>
             <h2><i class="bi bi-person-plus-fill me-2"></i>Cadastro</h2>
-            <form class="w-100 d-flex flex-column gap-3" method="POST" action="http://localhost:3000/api/cadastro">
+            <form class="w-100 d-flex flex-column gap-3" id="form-cadastro">
                 <input type="text" class="form-control bg-transparent text-white border-secondary" placeholder="Nome:"
                     aria-label="Nome" name = "nome" required>
                 <input type="email" class="form-control bg-transparent text-white border-secondary" placeholder="Email:"
@@ -72,6 +72,7 @@
         </ul>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         const passInput = document.getElementById('senhaInput');
         const toggleBtn = document.getElementById('togglePassword');
@@ -89,6 +90,8 @@
             }
         });
     </script>
+    <script src="/src/js/cadastro.js"></script>
+    <script type="module" src="/src/js/authUI.js"></script>
 </body>
 
 </html>

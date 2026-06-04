@@ -1,5 +1,6 @@
 /* ─── HEADER (TOPO) E FOOTER (RODAPÉ) ─── */
-header.main-header, footer {
+header.main-header,
+footer {
   background-color: rgba(49, 46, 129, 0.95) !important;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -24,7 +25,7 @@ header h1 a:hover {
 
 /* NAV ACTION BUTTON */
 header a.btn-action {
-  font-family: 'Inter', sans-serif; 
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   color: #ffffff !important;
   background-color: var(--primary-color) !important;
@@ -45,4 +46,77 @@ footer a {
 
 footer a:hover {
   color: var(--text-light) !important;
+}
+
+/* User Profile UI */
+.user-profile-dropdown {
+  cursor: pointer;
+  padding: 4px;
+}
+
+.user-avatar-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #4A77B5;
+  color: #F2F5F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border: 2px solid #233B63;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.user-name-hidden {
+  color: #F2F5F5;
+  font-weight: 500;
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: max-width 0.4s ease, opacity 0.4s ease;
+  opacity: 0;
+  z-index: 1;
+}
+
+.show-dropdown .user-name-hidden {
+  max-width: 150px;
+  opacity: 1;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.user-dropdown-menu {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background-color: #233B63;
+  border: 1px solid #4A77B5;
+  border-radius: 8px;
+  padding: 8px;
+  min-width: 160px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+.show-dropdown .user-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#btn-logout {
+  color: #FF5A3A !important;
+  background-color: transparent;
+  border: none;
+}
+
+#btn-logout:hover {
+  background-color: rgba(255, 90, 58, 0.1);
 }
