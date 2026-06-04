@@ -1,15 +1,14 @@
 :root {
-  --bg-base: #0f172a;
-  --bg-gradient: radial-gradient(circle at top, #312e81 0%, #0f172a 100%);
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --text-light: #f8fafc;
-  --text-muted: #94a3b8;
-  --primary-color: #22c55e;
-  /* Money green */
-  --primary-hover: #16a34a;
-  --accent-color: #eab308;
-  /* Gold */
+  --bg-base: #233B63;
+  --bg-gradient: radial-gradient(circle at top, #4A77B5 0%, #233B63 100%);
+  --glass-bg: rgba(242, 245, 245, 0.05);
+  --glass-border: rgba(242, 245, 245, 0.15);
+  --text-light: #F2F5F5;
+  --text-muted: rgba(242, 245, 245, 0.7);
+  --primary-color: #FF5A3A;
+  --primary-hover: #D93C2A;
+  --accent-color: #FFC933;
+  --accent-hover: #D89A14;
 }
 
 body {

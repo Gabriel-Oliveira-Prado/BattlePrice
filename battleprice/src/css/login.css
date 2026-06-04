@@ -89,8 +89,7 @@ input:focus {
 }
 
 .link-destaque:hover {
-  color: #f472b6;
-  /* Lighter pink for hover */
+  color: var(--accent-hover);
 }
 
 #togglePassword {
