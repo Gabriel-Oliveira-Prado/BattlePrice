@@ -44,8 +44,9 @@
         <a
           class="text-white text-decoration-none fw-bold d-flex align-items-center gap-1"
           href="#"
-          ><i class="bi bi-trophy-fill text-warning"></i> Placar</a
         >
+          <i class="bi bi-trophy-fill text-warning"></i> Placar
+        </a>
         <a class="nav-link text-white btn-action" href="login.html">Entrar</a>
       </nav>
     </header>
@@ -59,7 +60,6 @@
         ></a>
         <h2><i class="bi bi-person-fill me-2"></i>Faça seu login</h2>
 
-        <!-- Removido action e method do form — o login.js cuida disso -->
         <form class="w-100 d-flex flex-column gap-3">
           <input
             type="email"
@@ -130,25 +130,26 @@
           <a
             class="text-white text-decoration-none d-flex align-items-center gap-1"
             href="#"
-            ><i class="bi bi-github fs-4"></i> GitHub</a
           >
+            <i class="bi bi-github fs-4"></i> GitHub
+          </a>
         </li>
       </ul>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
       document
         .getElementById("togglePassword")
         .addEventListener("click", function () {
           const input = document.getElementById("senhaInput");
-          const icon = this;
           if (input.type === "password") {
             input.type = "text";
-            icon.classList.replace("bi-eye", "bi-eye-slash");
+            this.classList.replace("bi-eye", "bi-eye-slash");
           } else {
             input.type = "password";
-            icon.classList.replace("bi-eye-slash", "bi-eye");
+            this.classList.replace("bi-eye-slash", "bi-eye");
           }
         });
     </script>

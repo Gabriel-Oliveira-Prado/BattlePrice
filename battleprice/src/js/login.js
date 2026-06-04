@@ -2,6 +2,20 @@
 
 const API_BASE = "http://localhost:3000";
 
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  background: "#233B63",
+  color: "#F2F5F5",
+  didOpen: (toast) => {
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  },
+});
+
 document.querySelector("form").addEventListener("submit", async function (e) {
   e.preventDefault(); // impede o browser de navegar pro backend
 
@@ -22,7 +36,10 @@ document.querySelector("form").addEventListener("submit", async function (e) {
     const data = await res.json();
 
     if (!res.ok) {
-      alert(data.erro || "Email ou senha incorretos.");
+      Toast.fire({
+        icon: "error",
+        title: data.erro || "Email ou senha incorretos.",
+      });
       btnEntrar.disabled = false;
       btnEntrar.textContent = "Entrar";
       return;
@@ -32,10 +49,13 @@ document.querySelector("form").addEventListener("submit", async function (e) {
     localStorage.setItem("token", data.token);
     localStorage.setItem("usuario", JSON.stringify(data.usuario));
 
-    // Redireciona pro jogo
+    // Redireciona pro index
     window.location.href = "/Views/jogo.html";
   } catch (err) {
-    alert("Erro ao conectar com o servidor. Verifique se ele está rodando.");
+    Toast.fire({
+      icon: "error",
+      title: "Erro ao conectar com o servidor. Verifique se ele está rodando.",
+    });
     btnEntrar.disabled = false;
     btnEntrar.textContent = "Entrar";
   }
